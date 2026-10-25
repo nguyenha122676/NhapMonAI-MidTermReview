@@ -60,7 +60,7 @@ Dùng phương pháp phân giải bằng phản chứng (resolution by refutatio
 
 #### Bước 1: Cơ sở lý thuyết & Phủ định mục tiêu
 Theo **Nguyên lý Phân giải Bác bỏ (Resolution Refutation Theorem)**:
-$$KB \models D \iff KB \cup \{\neg D\} \text{ là Mâu thuẫn (Unsatisfiable / Inconsistent)}$$
+$$KB \models D \iff KB \cup \{\neg D\} \vdash \bot \quad \text{(Mâu thuẫn / Inconsistent)}$$
 Ta thêm phủ định của kết luận cần chứng minh là $\neg D$ vào tập tri thức.
 
 #### Bước 2: Chuyển đổi toàn bộ tri thức sang Dạng Chuẩn Hội (CNF)
@@ -399,7 +399,7 @@ $$D \to P \leftarrow S$$
 
 * **Trường hợp 1: Trước khi quan sát $P$ (Tập bằng chứng $Z = \emptyset$):**
   * Theo quy tắc d-separation cho cấu trúc Collider: Khi nút hội tụ $P$ **chưa được quan sát** ($P \notin Z$) và không có con cháu nào của $P$ (ở đây là $H$) được quan sát:
-    $$\text{Con đường } D \to P \leftarrow S \text{ TỰ ĐỘNG BỊ CHẶN (BLOCKED)!}$$
+    > Con đường $D \to P \leftarrow S$ **TỰ ĐỘNG BỊ CHẶN (BLOCKED)!**
   * Vì con đường duy nhất bị chặn, $D$ và $S$ là **d-separated cho trước tập rỗng**.
   * **Kết luận:** $D$ và $S$ **độc lập biên (Marginally Independent)** với nhau:
     $$P(D, S) = P(D) \cdot P(S) \quad \text{hay} \quad D \perp S \mid \emptyset$$
@@ -407,7 +407,7 @@ $$D \to P \leftarrow S$$
 
 * **Trường hợp 2: Sau khi đã quan sát biến Qua môn $P$ (Tập bằng chứng $Z = \{P\}$):**
   * Theo quy tắc d-separation: Khi nút hội tụ $P$ **đã được quan sát** ($P \in Z$):
-    $$\text{Con đường } D \to P \leftarrow S \text{ BỊ MỞ RA (ACTIVE / UNBLOCKED)!}$$
+    > Con đường $D \to P \leftarrow S$ **BỊ MỞ RA (ACTIVE / UNBLOCKED)!**
   * Vì con đường đã mở, $D$ và $S$ không còn d-separated nữa.
   * **Kết luận:** $D$ và $S$ **KHÔNG độc lập có điều kiện** khi đã biết $P$:
     $$D \not\perp S \mid P$$

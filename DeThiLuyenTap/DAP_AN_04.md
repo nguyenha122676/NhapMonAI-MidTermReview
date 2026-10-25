@@ -96,7 +96,7 @@ Tập mệnh đề ban đầu: $S = \{C_1, C_2, C_3, C_4, C_5\}$.
 #### Bước 4: Kết luận
 Do suy dẫn ra được mệnh đề rỗng $\Box$, tập mệnh đề $KB \cup \{\neg D\}$ là không thỏa được.  
 Theo định lý bác bỏ, ta khẳng định:
-$$\mathbf{KB \models D} \quad \text{(Điều phải chứng minh!)}$$
+$$KB \models D \quad \text{(Điều phải chứng minh)}$$
 
 ---
 
@@ -447,25 +447,25 @@ $$\mathbf{P(B, E, A, C) = P(B) \cdot P(E) \cdot P(A \mid B, E) \cdot P(C \mid A)
 
 ##### A. Phân tích tính độc lập biên giữa $B$ và $E$ ($B \stackrel{?}{\perp} E \mid \emptyset$):
 * Xét đường truyền duy nhất nối giữa $B$ và $E$:
-  $$\text{Đường đi: } B \to A \leftarrow E$$
+  > Đường đi: $B \to A \leftarrow E$
 * **Nhận diện cấu trúc nút:** Nút $A$ là một **Nút hội tụ (Collider / V-structure)** vì cả hai mũi tên đều đâm vào $A$ ($B \to A$ và $E \to A$).
 * **Áp dụng luật d-separation cho Collider:**
   * Một nút collider sẽ **BỊ CHẶN (BLOCKED)** nếu bản thân nó VÀ toàn bộ các nút con cháu của nó KHÔNG nằm trong tập bằng chứng đã quan sát $Z$.
   * Ở đây tập bằng chứng là rỗng ($Z = \emptyset$). Do đó nút $A \notin Z$ và hậu duệ $C \notin Z$.
   * Vì đường đi bị chặn tại collider $A$, không có dòng thông tin nào lưu thông được giữa $B$ và $E$.
 * **Kết luận:** **$B$ và $E$ ĐỘC LẬP BIÊN VỚI NHAU:**
-  $$\mathbf{B \perp E \mid \emptyset} \quad \implies P(B, E) = P(B) \cdot P(E)$$
+  $$B \perp E \mid \emptyset \quad \implies P(B, E) = P(B) \cdot P(E)$$
 
 ##### B. Phân tích tính độc lập có điều kiện giữa $B$ và $C$ khi biết $A$ ($B \stackrel{?}{\perp} C \mid A$):
 * Xét đường truyền nối giữa $B$ và $C$:
-  $$\text{Đường đi: } B \to A \to C$$
+  > Đường đi: $B \to A \to C$
 * **Nhận diện cấu trúc nút:** Nút $A$ là một **Nút chuỗi nhân quả (Causal Chain / Non-collider)** ($B \to A \to C$).
 * **Áp dụng luật d-separation cho Chain:**
   * Một nút non-collider sẽ **BỊ CHẶN (BLOCKED)** nếu nó ĐƯỢC QUAN SÁT (nằm trong tập điều kiện $Z$).
   * Ở đây tập bằng chứng là $Z = \{A\}$. Nút $A$ đã được quan sát.
   * Việc quan sát trạng thái của chuông báo động $A$ đã ngắt đứt hoàn toàn ảnh hưởng nhân quả từ $B$ truyền tới cuộc gọi $C$ (biết chuông kêu hay không là đủ để dự đoán cuộc gọi, biết thêm có trộm hay không không đem lại thông tin mới).
 * **Kết luận:** **$B$ và $C$ ĐỘC LẬP CÓ ĐIỀU KIỆN KHI BIẾT $A$:**
-  $$\mathbf{B \perp C \mid A}$$
+  $$B \perp C \mid A$$
 
 ##### C. Phân tích hiện tượng Explaining Away khi quan sát thêm $E = true$ sau khi đã có $A = true$:
 * **Trạng thái ban đầu khi mới chỉ biết $A = true$:**
@@ -475,7 +475,7 @@ $$\mathbf{P(B, E, A, C) = P(B) \cdot P(E) \cdot P(A \mid B, E) \cdot P(C \mid A)
   * Vì động đất $E = true$ là một nguyên nhân hoàn toàn thỏa đáng và đủ mạnh để giải thích tại sao chuông báo động kêu ($A = true$).
   * Sự xuất hiện của lời giải thích "động đất" đã làm triệt tiêu bớt nhu cầu phải viện dẫn giả thuyết "có trộm đột nhập".
   * Về mặt toán học xác suất:
-    $$\mathbf{P(B = true \mid A = true,\, E = true) < P(B = true \mid A = true)}$$
+    $$P(B = true \mid A = true,\, E = true) < P(B = true \mid A = true)$$
 * **Tên gọi chuẩn của hiện tượng:**
   * Tiếng Anh: **Explaining Away** (hoặc *Discounting Effect*).
   * Tiếng Việt: **Hiện tượng Giải tỏa nguyên nhân** (hoặc *Giảm trừ giả thuyết cạnh tranh*).

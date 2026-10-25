@@ -117,7 +117,7 @@ Quy ước hàm chọn (Selection function): Luôn chọn mục tiêu con ngoài
 #### 4. Kết luận:
 Quá trình suy diễn kết thúc tại **Mệnh đề mục tiêu rỗng $[\, \Box \,]$**, chứng minh rằng mục tiêu phản chứng dẫn tới mâu thuẫn.  
 Do đó truy vấn thành công:
-$$\mathbf{KB \vdash_{\text{SLD}} E \implies KB \models E} \quad \text{(Điều phải chứng minh!)}$$
+$$KB \vdash_{\text{SLD}} E \implies KB \models E \quad \text{(Điều phải chứng minh)}$$
 
 ---
 
@@ -137,7 +137,7 @@ Show the equations solved and verify the final substitution by applying it to bo
 
 ### Câu hỏi (Tiếng Việt)
 Tìm bộ hợp nhất tổng quát nhất (MGU), nếu tồn tại, cho
-$$Q(x, h(y), y) \quad \text{và} \quad Q(f(a), h(b), b).$$
+$$Q(x, h(y), y) \quad \text{and} \quad Q(f(a), h(b), b).$$
 Trình bày các phương trình được giải và kiểm tra phép thế cuối bằng cách áp dụng nó cho cả hai atom.
 
 ### Lời Giải Chi Tiết Chuẩn A+
@@ -418,9 +418,9 @@ Dùng tìm kiếm đồ thị $A^*$ với $f=g+h$. Sinh nút kế tiếp theo th
     * Chi phí cạnh: $c(B, C) = 1$.
     * Giá trị heuristic: $h(B) = 4$, $h(C) = 2$.
     * Bất đẳng thức tam giác:
-      $$h(B) \le c(B, C) + h(C) \iff 4 \le 1 + 2 = 3 \quad \implies \mathbf{4 \le 3 \text{ (SAI!) MEANING VIOLATION!}}$$
+      $$h(B) \le c(B, C) + h(C) \iff 4 \le 1 + 2 = 3 \quad (\text{Vô lý vì } 4 > 3)$$
   * Vì bất đẳng thức tam giác bị vi phạm nghiêm trọng trên cạnh $B \to C$, ta kết luận:
-    $$\implies \mathbf{Heuristic \; h(n) \; KH\hat{O}NG \; NH\hat{A}T \; QU\acute{A}N \; (INCONSISTENT).}$$
+    > **Heuristic $h(n)$ KHÔNG NHẤT QUÁN (INCONSISTENT).**
 
 * **Lưu ý cốt tử khi cài đặt thuật toán (Implementation Precaution):**
   * Nếu một heuristic chỉ hợp lệ (admissible) nhưng **không nhất quán (inconsistent)**, một trạng thái đã từng được lấy ra khỏi OPEN và đưa vào tập CLOSED hoàn toàn có thể được tìm thấy một đường đi mới với chi phí rẻ hơn thông qua một nhánh khác về sau.
@@ -457,7 +457,8 @@ $$P(S)=0.10, \qquad P(K \mid S)=0.80, \qquad P(K \mid \neg S)=0.20.$$
 
 * **Tóm tắt tham số tiên nghiệm và bằng chứng:**
   * Xác suất tiên nghiệm email là thư rác:
-    $$P(S) = 0.10 \implies P(\neg S) = 1 - 0.10 = 0.90 \quad \text{(90\% email trong hộp thư là hợp lệ)}$$
+    $$P(S) = 0.10 \implies P(\neg S) = 1 - 0.10 = 0.90$$
+    (nghĩa là 90% email trong hộp thư là thư hợp lệ).
   * Khả năng chứa từ khóa nếu là thư rác (True Positive Rate):
     $$P(K \mid S) = 0.80$$
   * Tỷ lệ từ khóa xuất hiện nhầm trong thư hợp lệ (False Positive Rate):

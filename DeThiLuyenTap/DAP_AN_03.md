@@ -140,11 +140,11 @@ Giải thích chính xác việc thay đổi thứ tự lượng từ làm thay 
 
 * **Câu 1: "Mọi robot đều giải được ít nhất một nhiệm vụ."**
   * Với mọi đối tượng $x$, nếu $x$ là một robot thì phải tồn tại một đối tượng $y$ sao cho $y$ là nhiệm vụ và $x$ giải được $y$.
-  $$\mathbf{\Phi_1: \quad \forall x \, \big( \text{Robot}(x) \implies \exists y \, (\text{Task}(y) \land \text{Solves}(x, y)) \big)}$$
+  $$\Phi_1: \quad \forall x \, \big( \text{Robot}(x) \implies \exists y \, (\text{Task}(y) \land \text{Solves}(x, y)) \big)$$
 
 * **Câu 2: "Tồn tại một nhiệm vụ mà mọi robot đều giải được."**
   * Tồn tại một đối tượng $y$ sao cho $y$ là nhiệm vụ, và với mọi đối tượng $x$, hễ $x$ là robot thì $x$ đều giải được nhiệm vụ $y$ này.
-  $$\mathbf{\Phi_2: \quad \exists y \, \big( \text{Task}(y) \land \forall x \, (\text{Robot}(x) \implies \text{Solves}(x, y)) \big)}$$
+  $$\Phi_2: \quad \exists y \, \big( \text{Task}(y) \land \forall x \, (\text{Robot}(x) \implies \text{Solves}(x, y)) \big)$$
 
 *(Cạm bẫy phòng thi: Trong câu 1, mệnh đề sau $\forall x$ phải dùng phép kéo theo $\implies$; bên trong $\exists y$ phải dùng phép hội $\land$. Dùng sai liên từ logic sẽ bị trừ điểm).*
 
@@ -195,7 +195,7 @@ Giải thích bài toán Flying Penguin (Tweety). Vì sao luật `Bird(x) ⇒ Fl
   * Từ $\text{Penguin}(\text{Tweety})$ và luật (2) $\implies \text{Bird}(\text{Tweety})$.
   * Từ $\text{Bird}(\text{Tweety})$ và luật (1) $\implies \mathbf{\text{Flies}(\text{Tweety})}$.
   * Mặt khác, từ $\text{Penguin}(\text{Tweety})$ và luật (3) $\implies \mathbf{\neg\text{Flies}(\text{Tweety})}$.
-  * Ta suy ra đồng thời cả hai kết luận trái ngược: $\text{Flies}(\text{Tweety}) \land \neg\text{Flies}(\text{Tweety}) \equiv \mathbf{\bot \text{ (Mâu thuẫn)}}$.
+  * Ta suy ra đồng thời cả hai kết luận trái ngược: $\text{Flies}(\text{Tweety}) \land \neg\text{Flies}(\text{Tweety}) \equiv \bot$ (Mâu thuẫn).
 
 #### 2. Hạn chế cốt tử của Logic cổ điển được bộc lộ:
 1. **Tính đơn điệu (Monotonicity of Classical Logic):**
@@ -203,7 +203,7 @@ Giải thích bài toán Flying Penguin (Tweety). Vì sao luật `Bird(x) ⇒ Fl
      $$KB \models \alpha \implies KB \cup \{\beta\} \models \alpha$$
    * Logic cổ điển hoàn toàn không có cơ chế **rút lại (retract) một niềm tin/kết luận đã rút ra** khi nhận thêm thông tin về ngoại lệ.
 2. **Nguyên lý nổ tung (Principle of Explosion / Ex Falso Quodlibet):**
-   * Một khi mâu thuẫn $\bot$ xuất hiện trong cơ sở tri thức cổ điển, hệ thống sẽ chứng minh được *mọi* phát biểu ngẫu nhiên đều là đúng ($KB \models \text{Trăng làm bằng phô mai}$). Hệ thống suy diễn hoàn toàn tê liệt.
+   * Một khi mâu thuẫn $\bot$ xuất hiện trong cơ sở tri thức cổ điển, hệ thống sẽ chứng minh được *mọi* phát biểu ngẫu nhiên đều là đúng ($KB \models \text{False}$, hệ thống suy diễn hoàn toàn tê liệt).
 
 #### 3. Phương thức giải quyết trong AI: Suy luận phi đơn điệu (Non-Monotonic Reasoning):
 * Để mô phỏng trí tuệ con người trong đời sống thực, AI cần sử dụng **Suy luận mặc định / Phi đơn điệu (Default / Non-Monotonic Reasoning)**:
@@ -403,7 +403,7 @@ Do đó $g(S_0) = 0, h(S_0) = 3 \implies f(S_0) = 3$.
   * Bước 2: Đẩy quân cờ số 5 lên trên.
   * Bước 3: Đẩy quân cờ số 8 sang bên trái.
 * **Tổng chi phí tối ưu (Optimal Cost):**
-  $$g^* = \mathbf{3} \text{ bước di chuyển}$$
+  $$g^* = 3 \quad \text{(bước di chuyển)}$$
 
 ---
 
@@ -464,7 +464,7 @@ Ta có thể giải bài toán bằng hai phương pháp toán học chuẩn ch�
 * Do đó ta luôn có bất đẳng thức:
   $$H(A, B) \le H(A) + H(B)$$
 * Dấu bằng xảy ra (tức là $H(A, B)$ đạt giá trị cực đại toàn cục) **khi và chỉ khi**:
-  $$I(A; B) = 0 \iff A \text{ và } B \text{ độc lập thống kê với nhau!}$$
+  $$I(A; B) = 0 \iff A \perp B \quad \text{(A và B độc lập thống kê)}$$
 * Điều này hoàn toàn trùng khớp với bản chất triết học của Nguyên lý MaxEnt: *"Không đưa thêm bất kỳ giả định hay mối tương quan nào ngoài những thông tin ràng buộc đã biết."*
 
 ##### Cách 2: Phương pháp Nhân tử Lagrange (Lagrange Multipliers)
@@ -479,27 +479,27 @@ Lấy đạo hàm riêng theo từng $p_i$ và cho triệt tiêu bằng 0:
 Nhận xét hệ thức liên hệ trực tiếp giữa 4 biến:
 $$p_1 \cdot p_4 = e^{-(1+\lambda_0+\lambda_1+\lambda_2)} \cdot e^{-(1+\lambda_0)} = e^{-(2+2\lambda_0+\lambda_1+\lambda_2)}$$
 $$p_2 \cdot p_3 = e^{-(1+\lambda_0+\lambda_1)} \cdot e^{-(1+\lambda_0+\lambda_2)} = e^{-(2+2\lambda_0+\lambda_1+\lambda_2)}$$
-$$\implies \mathbf{p_1 \cdot p_4 = p_2 \cdot p_3}$$
+$$\implies p_1 \cdot p_4 = p_2 \cdot p_3$$
 Hệ thức $p_1 p_4 = p_2 p_3$ chính là điều kiện tương đương đại số cần và đủ để hai biến cố $A$ và $B$ độc lập!
 
 #### 3. Tính toán giá trị bằng số cụ thể:
 Vì $A \perp B$, xác suất của mỗi biến cố nguyên tử bằng tích các xác suất biên tương ứng:
-* $p_1 = P(A \land B) = P(A) \cdot P(B) = 0.4 \times 0.3 = \mathbf{0.12}$
-* $p_2 = P(A \land \neg B) = P(A) \cdot P(\neg B) = 0.4 \times (1 - 0.3) = 0.4 \times 0.7 = \mathbf{0.28}$
-* $p_3 = P(\neg A \land B) = P(\neg A) \cdot P(B) = (1 - 0.4) \times 0.3 = 0.6 \times 0.3 = \mathbf{0.18}$
-* $p_4 = P(\neg A \land \neg B) = P(\neg A) \cdot P(\neg B) = 0.6 \times 0.7 = \mathbf{0.42}$
+* $p_1 = P(A \land B) = P(A) \cdot P(B) = 0.4 \times 0.3 = 0.12$
+* $p_2 = P(A \land \neg B) = P(A) \cdot P(\neg B) = 0.4 \times (1 - 0.3) = 0.4 \times 0.7 = 0.28$
+* $p_3 = P(\neg A \land B) = P(\neg A) \cdot P(B) = (1 - 0.4) \times 0.3 = 0.6 \times 0.3 = 0.18$
+* $p_4 = P(\neg A \land \neg B) = P(\neg A) \cdot P(\neg B) = 0.6 \times 0.7 = 0.42$
 
 #### 4. Kiểm tra lại toàn diện (Verification):
 1. **Kiểm tra điều kiện chuẩn hóa:**
-   $$\sum_{i=1}^4 p_i = 0.12 + 0.28 + 0.18 + 0.42 = 1.00 \quad \text{(Thỏa mãn!)}$$
+   $$\sum_{i=1}^4 p_i = 0.12 + 0.28 + 0.18 + 0.42 = 1.00 \quad \text{(Thỏa mãn)}$$
 2. **Kiểm tra phân phối biên của $A$:**
-   $$P(A) = p_1 + p_2 = 0.12 + 0.28 = 0.40 \quad \text{(Thỏa mãn!)}$$
+   $$P(A) = p_1 + p_2 = 0.12 + 0.28 = 0.40 \quad \text{(Thỏa mãn)}$$
 3. **Kiểm tra phân phối biên của $B$:**
-   $$P(B) = p_1 + p_3 = 0.12 + 0.18 = 0.30 \quad \text{(Thỏa mãn!)}$$
+   $$P(B) = p_1 + p_3 = 0.12 + 0.18 = 0.30 \quad \text{(Thỏa mãn)}$$
 4. **Kiểm tra tính độc lập:**
    $$p_1 p_4 = 0.12 \times 0.42 = 0.0504$$
    $$p_2 p_3 = 0.28 \times 0.18 = 0.0504$$
-   Hai tích bằng nhau tuyệt đối. Nghiệm phân phối MaxEnt duy nhất là $\mathbf{p = (0.12, 0.28, 0.18, 0.42)}$.
+   Hai tích bằng nhau tuyệt đối. Nghiệm phân phối MaxEnt duy nhất là $\mathbf{p} = (0.12, 0.28, 0.18, 0.42)$.
 
 ---
 

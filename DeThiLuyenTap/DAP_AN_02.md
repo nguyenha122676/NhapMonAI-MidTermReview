@@ -37,15 +37,16 @@
   * Một **tác tử phản xạ đơn giản (Simple Reflex Agent)** chỉ phụ thuộc vào tri giác ngay tại thời điểm hiện tại:
     $$\text{Action}_t = f(p_t) \quad \text{với } p_t \in \mathcal{P}$$
   * Ngược lại, một **tác tử có bộ nhớ (Agent with Memory / Model-based Reflex Agent)** duy trì một **trạng thái nội bộ (Internal State $s_t$)** nhằm phản ánh các khía cạnh của thế giới mà cảm biến hiện thời không quan sát thấy (unobserved history). Quá trình cập nhật và ra quyết định diễn ra theo hệ thức hồi quy hai bước:
-    $$\begin{cases} s_t = \text{UpdateState}(s_{t-1},\, a_{t-1},\, p_t) & \text{(Cập nhật trạng thái từ quá khứ và tri giác mới)} \\ a_t = \text{Action}(s_t) & \text{(Hành động dựa trên trạng thái nội bộ tổng hợp)} \end{cases}$$
+    $$\begin{cases} s_t = \text{UpdateState}(s_{t-1},\, a_{t-1},\, p_t) \\ a_t = \text{Action}(s_t) \end{cases}$$
+    Trong đó $s_t$ tổng hợp lịch sử tri giác từ quá khứ, và $a_t$ ra quyết định dựa trên trạng thái nội bộ tổng hợp này.
   * Do đó, cùng một tri giác hiện tại $p_t$ như nhau, nếu hai thời điểm $t_1$ và $t_2$ có trạng thái nội bộ khác nhau ($s_{t_1} \neq s_{t_2}$ do lịch sử trước đó khác biệt), thì tác tử sẽ sinh ra hai hành động hoàn toàn khác nhau:
     $$a_{t_1} = \text{Action}(s_{t_1}) \neq \text{Action}(s_{t_2}) = a_{t_2}$$
 * **Ví dụ thực tế minh họa:**
   * Xét một **Robot hút bụi thông minh trong phòng làm việc**:
     * **Đầu vào hiện tại ($p_t$):** Cảm biến chạm báo phát hiện vật cản phía trước mặt (ví dụ: chân bàn).
-    * **Kịch bản 1 (Lịch sử: Chưa từng chạm góc này):** Trạng thái nội bộ lưu trữ $s_{t_1} = \text{"Đang vẽ bản đồ khu vực mới"}$. Robot chọn hành động: *Quay sang phải 90 độ và tiếp tục dò đường mép tường*.
-    * **Kịch bản 2 (Lịch sử: Đã thử quay phải 3 lần liên tiếp nhưng đều gặp vật cản kẹp kín):** Trạng thái nội bộ ghi nhận $s_{t_2} = \text{"Bị kẹt trong góc hẹp"}$. Cùng nhận đầu vào chạm phía trước, robot không quay phải nữa mà chọn hành động: *Lùi lại 20cm, quay 180 độ hoặc phát âm thanh hú còi báo hiệu người dùng đến giải cứu*.
-  * Rõ ràng, cùng một đầu vào hiện tại $p_t = \text{"Chạm vật cản"}$, nhưng hai hành động sinh ra là trái ngược nhau nhờ có bộ nhớ lịch sử.
+    * **Kịch bản 1 (Lịch sử: Chưa từng chạm góc này):** Trạng thái nội bộ lưu trữ $s_{t_1} = \text{Explore}$ (Đang vẽ bản đồ khu vực mới). Robot chọn hành động: *Quay sang phải 90 độ và tiếp tục dò đường mép tường*.
+    * **Kịch bản 2 (Lịch sử: Đã thử quay phải 3 lần liên tiếp nhưng đều gặp vật cản kẹp kín):** Trạng thái nội bộ ghi nhận $s_{t_2} = \text{Trapped}$ (Bị kẹt trong góc hẹp). Cùng nhận đầu vào chạm phía trước, robot không quay phải nữa mà chọn hành động: *Lùi lại 20cm, quay 180 độ hoặc phát âm thanh hú còi báo hiệu người dùng đến giải cứu*.
+  * Rõ ràng, cùng một đầu vào hiện tại $p_t = \text{Bump}$ (Cảm biến chạm vật cản), nhưng hai hành động sinh ra là trái ngược nhau nhờ có bộ nhớ lịch sử.
 
 ---
 
@@ -104,8 +105,9 @@ Trình bày agenda/tập sự kiện suy ra sau mỗi lần một luật đượ
 
 #### 4. Kết luận:
 Do mục tiêu `Safe` đã được lấy ra và đưa vào tập các sự kiện chân lý (`Inferred`), ta kết luận:
-$$\mathbf{KB \models Safe} \quad \text{(Safe được kéo theo một cách logic từ KB)}$$
-Độ phức tạp thời gian của thuật toán là tuyến tính: $O(\text{Kích thước KB})$.
+$$KB \models \text{Safe}$$
+(nghĩa là `Safe` được kéo theo một cách logic từ $KB$).
+Độ phức tạp thời gian của thuật toán là tuyến tính: $O(\text{size}(KB))$.
 
 ---
 
@@ -125,7 +127,7 @@ Show the equation set, substitutions, composition, and verification.
 
 ### Câu hỏi (Tiếng Việt)
 Tìm bộ hợp nhất tổng quát nhất (MGU), hoặc chứng minh rằng không tồn tại:
-$$P(f(x), y, g(y)) \quad \text{và} \quad P(f(a), g(z), g(g(b))).$$
+$$P(f(x), y, g(y)) \quad \text{and} \quad P(f(a), g(z), g(g(b))).$$
 Trình bày tập phương trình, các phép thế, phép hợp thành và bước kiểm tra kết quả.
 
 ### Lời Giải Chi Tiết Chuẩn A+
@@ -201,8 +203,8 @@ Giải thích hiện tượng bùng nổ tổ hợp (combinatorial explosion) tr
 
 #### 2. Tính toán cụ thể với $b = 4$ và $d = 11$:
 * **Số nút ở tầng cuối cùng (tầng $d = 11$):**
-  $$N_{\text{leaf}} = b^d = 4^{11} = 2^{22} = \mathbf{4,194,304} \text{ nút}$$
-* *(Mở rộng: Tổng số nút trên toàn bộ cây tìm kiếm là $S = \sum_{i=0}^{11} 4^i = \frac{4^{12}-1}{4-1} = \frac{16,777,216 - 1}{3} = 5,592,405$ nút).*
+  $$N_{\text{leaf}} = b^d = 4^{11} = 2^{22} = 4{,}194{,}304 \text{ nút}$$
+* *(Mở rộng: Tổng số nút trên toàn bộ cây tìm kiếm là $S = \sum_{i=0}^{11} 4^i = \frac{4^{12}-1}{4-1} = 5{,}592{,}405$ nút).*
 
 #### 3. Vì sao máy tính nhanh hơn 100 lần không giải quyết được vấn đề cốt lõi?
 * Giả sử máy tính cũ giải được bài toán ở độ sâu giới hạn $d_{\text{old}}$ trong thời gian $T$, tức là xử lý được $b^{d_{\text{old}}}$ nút.
@@ -211,7 +213,7 @@ Giải thích hiện tượng bùng nổ tổ hợp (combinatorial explosion) tr
 * Độ sâu mới $d_{\text{new}}$ mà máy tính nhanh hơn 100 lần có thể đạt tới được tính theo công thức logarithm:
   $$b^{d_{\text{new}}} = 100 \times b^{d_{\text{old}}} \implies d_{\text{new}} = d_{\text{old}} + \log_b(100)$$
 * Với $b = 4$:
-  $$\Delta d = \log_4(100) = \frac{\ln(100)}{\ln(4)} = \frac{4.605}{1.386} \approx \mathbf{3.32} \text{ tầng}$$
+  $$\Delta d = \log_4(100) = \frac{\ln(100)}{\ln(4)} \approx 3.32 \text{ tầng}$$
 * **Kết luận triết lý:** Máy tính nhanh hơn **100 lần** (một bước nhảy vọt phần cứng cực lớn) chỉ giúp ta đào sâu thêm được vẻn vẹn **chưa đầy 4 bước suy diễn**! Tăng tốc độ phần cứng chỉ là một giải pháp tỷ lệ hằng số đối với một hàm độ phức tạp tăng theo cấp số nhân ($O(b^d)$). Nó hoàn toàn bất lực trước quy luật bùng nổ tổ hợp.
 
 #### 4. Các chiến lược AI giúp giải quyết vấn đề:
@@ -403,7 +405,7 @@ Cây trò chơi có độ sâu 2:
   * Thăm lá thứ nhất (giá trị 5): $\beta = \min(+\infty, 5) = 5$. Ta có $\alpha = 4, \beta = 5$ (chưa thỏa điều kiện cắt vì $\alpha < \beta$).
   * Thăm lá thứ hai (giá trị 2): $\beta = \min(5, 2) = 2$.
   * Kiểm tra điều kiện cắt tỉa:
-    $$\alpha = 4 \ge \beta = 2 \implies \mathbf{\alpha \ge \beta \text{ (Thỏa mãn!)}}$$
+    $$\alpha = 4 \ge \beta = 2 \implies \alpha \ge \beta \quad \text{(Thỏa điều kiện cắt!)}$$
   * **Cắt tỉa (Alpha-cutoff tại $C$):** Người chơi MIN tại $C$ chắc chắn sẽ chọn nước đi có giá trị không vượt quá 2 ($\le 2$). Nhưng người chơi MAX tại gốc $A$ đã có phương án bảo đảm đạt ít nhất điểm 4 (ở nhánh $B$). Do đó MAX sẽ không bao giờ để thế cờ đi vào $C$.
   * **Lá bị cắt:** Cắt bỏ lá có giá trị **8**.
 
@@ -412,7 +414,7 @@ Cây trò chơi có độ sâu 2:
 * Tại nút $D$ (nút MIN, cập nhật $\beta$):
   * Thăm lá thứ nhất (giá trị 3): $\beta = \min(+\infty, 3) = 3$.
   * Kiểm tra điều kiện cắt tỉa:
-    $$\alpha = 4 \ge \beta = 3 \implies \mathbf{\alpha \ge \beta \text{ (Thỏa mãn!)}}$$
+    $$\alpha = 4 \ge \beta = 3 \implies \alpha \ge \beta \quad \text{(Thỏa điều kiện cắt!)}$$
   * **Cắt tỉa (Alpha-cutoff tại $D$):** MIN tại $D$ đã tìm được một nước đi có giá trị 3, nghĩa là $V(D) \le 3$. MAX tại $A$ sẽ không bao giờ chọn nhánh $D$ vì đã có nhánh $B$ với giá trị 4.
   * **Các lá bị cắt:** Lập tức cắt bỏ toàn bộ các lá còn lại của $D$, bao gồm các lá có giá trị **9** và **1**.
 
@@ -484,9 +486,9 @@ Mặc dù xét nghiệm có độ nhạy rất cao ($90\%$) và độ đặc hi�
     * Số người khỏe mạnh: $100.000 \times 0.98 = 98.000$ người.
       * Dù tỷ lệ dương tính giả chỉ là $5\%$, nhưng áp dụng trên tập người khỏe mạnh khổng lồ sẽ sinh ra: $98.000 \times 0.05 = \mathbf{4.900}$ ca dương tính giả!
   * **Tổng số ca dương tính trong cộng đồng:**
-    $$\text{Tổng dương tính} = 1.800 + 4.900 = 6.700 \text{ ca}$$
+    $$\text{Total Positive} = 1800 + 4900 = 6700 \text{ ca}$$
   * Do đó, xác suất một ca dương tính là người có bệnh thật sự:
-    $$P(D \mid +) = \frac{1.800}{1.800 + 4.900} = \frac{1.800}{6.700} \approx 26.87\%$$
+    $$P(D \mid +) = \frac{1800}{1800 + 4900} = \frac{1800}{6700} \approx 26.87\%$$
 * **Kết luận nhận thức AI:**
   * Nguyên nhân gốc rễ là **Tỷ lệ hiện mắc của bệnh trong cộng đồng quá nhỏ (hiếm gặp, $2\%$)**, khiến cho nhóm người khỏe mạnh áp đảo hoàn toàn ($98\%$).
   * Hiện tượng này gọi là **Nghịch lý tỷ lệ gốc (Base Rate Fallacy)**: Con người thường chỉ chú ý đến thông tin độ chính xác bề ngoài của xét nghiệm (độ nhạy $90\%$) mà bỏ qua thông tin nền tảng cực kỳ quan trọng là tần suất xuất hiện ban đầu của hiện tượng (Prior probability).
